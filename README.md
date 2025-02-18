@@ -30,4 +30,4 @@ SmartyPlantsIoT/SmartyPlantsWebFront
  - contains the frontend of the web app
 
 SmartyPlantsIoT/ESP
- - contains the ESP code that measures sensor data, publishes it and manages other components
+ - contains the arduino code that measures sensor data, publishes it and manages other components
