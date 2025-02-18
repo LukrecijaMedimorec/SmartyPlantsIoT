@@ -19,10 +19,6 @@ System components:
      - subscribes to an mqtt topic to read the data sent by ESP, which is then stored in a database
      - connected to the same network as ESP
 
-## Pinout
-
-![pinout_image](smartyPlantsPinout.jpeg)
-
 ### Project structure
 
 SmartyPlantsIoT/python
@@ -33,3 +29,13 @@ SmartyPlantsIoT/SmartyPlantsWebFront
 
 SmartyPlantsIoT/ESP8266
  - contains the arduino code that measures sensor data, publishes it and manages other components
+
+
+### Web app screenshot
+
+![web_screenshot](smartyPlantsWeb.jpeg)
+
+
+### Pinout
+
+![pinout_image](smartyPlantsPinout.jpeg)
