@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smarty Plants</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <img src="/static/images/logo.svg" alt="Smarty Plants Logo" class="logo">
+    <h1>smarty plants</h1>
+    <p class="subtitle">take care of your plants wherever you are</p>
+  </header>
+  
+  <main>
+    <div class="card-container">
+
+      <!-- Temperature Card -->
+      <div class="card">
+        <img src="/static/images/temperature.svg" alt="Temperature Icon" class="card-icon">
+        <div class="card-content">
+          <h2>temperature</h2>
+          <div class="value-container">
+            <p id="temperatureValue" class="value">{{ temperature }}°C</p>
+          </div>
+          <p id="avgTemp" class="average">average: {{ avg_temp }}°C</p>
+          <p id="maxTemp" class="high">highest: {{ max_temp }}°C</p>
+          <p id="minTemp" class="low">lowest: {{ min_temp }}°C</p>
+          <div class="action-alert">
+            <p id="temperatureAlarm" class="action-temperature">{{ temperature_alarm }}</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Humidity Card -->
+      <div class="card">
+        <img src="/static/images/humidity.svg" alt="Humidity Icon" class="card-icon">
+        <div class="card-content">
+          <h2>humidity</h2>
+          <div class="value-container">
+            <p id="humidityValue" class="value">{{ humidity }}%</p>
+          </div>
+          <p id="avgHum" class="average">average: {{ avg_hum }}%</p>
+          <p id="maxHum" class="high">highest: {{ max_hum }}%</p>
+          <p id="minHum" class="low">lowest: {{ min_hum }}%</p>
+          <div class="action-alert">
+            <p id="humidityAlarm" class="action-humidity">{{ humidity_alarm }}</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Rainfall Card -->
+      <div class="card">
+        <img src="/static/images/rainfall.svg" alt="Rainfall Icon" class="card-icon">
+        <div class="card-content">
+          <h2>rainfall</h2>
+          <div class="value-container">
+            <p id="rainStatus" class="value">{{ rain_status }}</p>
+          </div>
+          <p id="latestTime" class="last-rainfall">last rainfall: {{ latest_time }}</p>
+          <div class="action-alert">
+            <p id="rainAction" class="action-rainfall">{{ rain_action }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.4/socket.io.min.js"></script>
+  
+  <script>
+    const socket = io();
+
+    socket.on('new_data', function(data) {
+      console.log("New data received:", data);
+      
+      // Update temperature values
+      if (data.temperature !== undefined)
+        document.getElementById("temperatureValue").innerText = data.temperature + "°C";
+      if (data.temperature_alarm !== undefined)
+        document.getElementById("temperatureAlarm").innerText = data.temperature_alarm;
+      
+      // Update humidity values
+      if (data.humidity !== undefined)
+        document.getElementById("humidityValue").innerText = data.humidity + "%";
+      if (data.humidity_alarm !== undefined)
+        document.getElementById("humidityAlarm").innerText = data.humidity_alarm;
+      
+      // Update rainfall values
+      if (data.rain_status !== undefined)
+        document.getElementById("rainStatus").innerText = data.rain_status;
+      if (data.rain_action !== undefined)
+        document.getElementById("rainAction").innerText = data.rain_action;
+      if (data.latest_time !== undefined)
+        document.getElementById("latestTime").innerText = "last rainfall: " + data.latest_time;
+    });
+  </script>
+</body>
+</html>
