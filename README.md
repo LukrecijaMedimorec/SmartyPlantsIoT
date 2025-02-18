@@ -21,6 +21,8 @@ System components:
 
 ## Pinout
 
+![pinout_image](smartyPlantsPinout.jpeg)
+
 ### Project structure
 
 SmartyPlantsIoT/python
@@ -29,5 +31,5 @@ SmartyPlantsIoT/python
 SmartyPlantsIoT/SmartyPlantsWebFront
  - contains the frontend of the web app
 
-SmartyPlantsIoT/ESP
+SmartyPlantsIoT/ESP8266
  - contains the arduino code that measures sensor data, publishes it and manages other components
